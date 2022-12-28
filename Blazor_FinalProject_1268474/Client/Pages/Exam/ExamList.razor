@@ -1,0 +1,68 @@
+﻿@page "/Exams/List"
+@inject HttpClient http
+@inject IToastService toastService
+@inject NavigationManager navManager
+<div class="row">
+    <div class="col-12">
+        <h3>Exam</h3>
+        <div class="d-flex justify-content-end mb-1">
+            <a class="btn btn-primary btn-sm" href="/Exams/Create">Create New</a>
+        </div>
+        @if (exams is null)
+        {
+            <div>Loading..</div>
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Exam Name</th>
+                        <th>Exam Fee</th>                      
+                        <th>Details</th>
+                        <th>...</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var o in exams)
+                    {
+                        <tr>
+                            
+                            <td>@o.ExamName</td>
+                            <td>@o.ExamFee.ToString("0.00")</td>
+                            <td>
+                                <a class="btn btn-link" href="/Exams/Details/@o.ExamID">Details</a>
+                            </td>
+                            <td>
+
+                                <a class="btn btn-primary btn-sm" href="/Exams/Edit/@o.ExamID">Edit</a>
+                                <button @onclick="@(()=>Delete(o.ExamID))" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+@code {
+    private ExamDTO[]? exams;
+    protected override async Task OnInitializedAsync()
+    {
+        exams = await http.GetFromJsonAsync<ExamDTO[]>("api/Exams/DTO");
+    }
+    private async Task Delete(int id)
+    {
+        var response = await http.DeleteAsync($"api/Exams/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            toastService.ShowSuccess("Data deleted successfully", "Success");
+            exams = await http.GetFromJsonAsync<ExamDTO[]>("api/Exams");
+        }
+        else
+        {
+            toastService.ShowError("Failed to delete data.", "Error");
+        }
+    }
+}

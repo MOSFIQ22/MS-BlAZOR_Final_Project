@@ -1,0 +1,147 @@
+﻿@page "/Trainees/Create"
+@using System.Net.Http.Headers;
+@using R50_M10_Class_07_Work_01.Shared.DTO;
+@inject HttpClient http;
+@inject NavigationManager navManager
+@inject IToastService toastService
+<div class="row">
+    <div class="col-12">
+        <EditForm Model="@trainee" OnValidSubmit="SaveAsync" OnInvalidSubmit="InvalidData">
+            <h3>Create Trainee</h3>
+            <DataAnnotationsValidator />
+            <div class="form-group row mb-1">
+                <label for="@trainee.TraineeName" class="col-form-label col-form-label-sm col-2 text-end">Trainee Name</label>
+                <div class="col-4">
+                    <InputText @bind-Value="trainee.TraineeName" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(()=> trainee.TraineeName)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@trainee.TraineeAddress" class="col-form-label col-form-label-sm col-2 text-end">Trainee Address</label>
+                <div class="col-4">
+                    <InputText @bind-Value="trainee.TraineeAddress" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(()=> trainee.TraineeAddress)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@trainee.Email" class="col-form-label col-form-label-sm col-2 text-end">Email</label>
+                <div class="col-4">
+                    <InputText @bind-Value="trainee.Email" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(()=> trainee.Email)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@trainee.CourseName" class="col-form-label col-form-label-sm col-2 text-end">Course Name</label>
+                <div class="col-4">
+                    <InputSelect @bind-Value="trainee.CourseID" class="form-select form-select-sm">
+                        <option value="0">Select</option>
+                        @if (courses is not null)
+                        {
+                            foreach(var p in courses)
+                            {
+                                <option value="@p.CourseID">@p.CourseName</option>
+                            }
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(()=> trainee.CourseID)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@trainee.BirthDate" class="col-form-label col-form-label-sm col-2 text-end">Birth Date</label>
+                <div class="col-4">
+                    <InputDate @bind-Value="trainee.BirthDate" Type="InputDateType.Date" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(()=> trainee.BirthDate)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@trainee.Picture" class="col-form-label col-form-label-sm col-2 text-end">Picture</label>
+                <div class="col-4">
+                    <InputFile OnChange="@OnInputFileChange" class="form-control form-control-sm" />
+                    <input type="hidden" @bind="trainee.Picture" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(()=> trainee.Picture)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@trainee.IsRunning" class="col-form-label col-form-label-sm col-2 text-end">Is Running</label>
+                <div class="col-4 pt-1">
+                    <InputCheckbox @bind-Value="@trainee.IsRunning"/>
+
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+
+                <div class="col-4 offset-2">
+                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+    <div class="col-12">
+        <a href="/Trainees/List" class="btn btn-link">Back to list</a>
+    </div>
+</div>
+@code {
+    TraineeDTO trainee = new();
+    private Course[]? courses;
+    IBrowserFile? selectedFile;
+    string? fileSelectMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await http.GetFromJsonAsync<Course[]>("api/Courses");
+    }
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+        trainee.Picture = e.File.Name;
+        fileSelectMessage = null;
+
+    }
+    private async Task SaveAsync(){
+        if (trainee is not null)
+        {
+
+
+            var saveImage = await UploadItAsysnc();
+            trainee.Picture = saveImage.StoredFileName;
+            var response = await http.PostAsJsonAsync<TraineeDTO>("api/Trainees", trainee);
+            var emp = await response.Content.ReadFromJsonAsync<TraineeDTO>();
+            if (response.IsSuccessStatusCode)
+            {
+                toastService.ShowSuccess("Data saved successsfully", "Success");
+                trainee = new();
+                navManager.NavigateTo("/Trainees/List");
+            }
+            //navManager.NavigateTo("/Tourists/List");
+        }
+    }
+    public void InvalidData()
+    {
+        var x = trainee;
+    }
+    private async Task<ImageUploadResponse> UploadItAsysnc()
+    {
+        using (var ms = new MemoryStream())
+        {
+
+            if (selectedFile is not null)
+            {
+                var content = new MultipartFormDataContent();
+                var fileContent = new StreamContent(selectedFile.OpenReadStream(long.MaxValue));
+
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue(selectedFile.ContentType);
+                content.Add(content: fileContent, name: "\"file\"", fileName: selectedFile.Name);
+                var response = await http.PostAsync("api/Trainees/Upload", content);
+                var r = await response.Content.ReadFromJsonAsync<ImageUploadResponse>();
+                return r == null ? new ImageUploadResponse() : r;
+            }
+            else
+            {
+                return new ImageUploadResponse();
+            }
+
+        }
+    }
+
+}
+

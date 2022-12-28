@@ -1,0 +1,92 @@
+﻿@page "/Courses/Delete/{id:int}"
+@inject HttpClient http
+@inject IToastService toastService
+@inject NavigationManager nav
+<div class="row">
+    <div class="col-12">
+        @if (course is null)
+        {
+            <div>Loading...</div>
+        }
+        else
+        {
+            <EditForm Model="@course" OnValidSubmit="DeleteCourse">
+                <h3>Delete Course</h3>
+                <DataAnnotationsValidator />
+                <div class="form-group row mb-1">
+                    <label class="col-form-label col-2 text-end" for="@course.BatchName">Batch name</label>
+                    <div class="col-4">
+                       @course.BatchName
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label class="col-form-label col-2 text-end" for="@course.CourseName">Course name</label>
+                    <div class="col-4">
+                        @course.CourseName
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label class="col-form-label col-2 text-end" for="@course.CourseDesc">Course name</label>
+                    <div class="col-4">
+                        @course.CourseDesc
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label class="col-form-label col-2 text-end" for="@course.CourseDuration">Course name</label>
+                    <div class="col-4">
+                        @course.CourseDuration
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@course.StartDate" class="col-form-label col-2 text-end">Start Date</label>
+                    <div class="col-4">
+                        @course.StartDate
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@course.EndDate" class="col-form-label col-2 text-end">End Date</label>
+                    <div class="col-4">
+                       @course.EndDate
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@course.Available" class="col-form-label col-2 text-end">Available</label>
+                    <div class="col-4 pt-1">
+                        @course.Available
+
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+
+                    <div class="col-4 offset-2">
+                        <button type="submit" class="btn btn-primary">Delete</button>
+
+                    </div>
+                </div>
+            </EditForm>
+        }
+    </div>
+    <div class="col-12">
+        <a href="/Courses/List" class="btn btn-link">Back to list</a>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private Course? course = default!;
+    protected override async Task OnInitializedAsync()
+    {
+        course = await http.GetFromJsonAsync<Course>($"api/Courses/{id}");
+    }
+    private async Task DeleteCourse()
+    {
+        var respose = await http.DeleteAsync($"api/Courses/{id}");
+        if (respose.IsSuccessStatusCode)
+        {
+            toastService.ShowSuccess("Data deleted successsfully", "Success");
+            nav.NavigateTo("/Courses/List");
+        }
+    }
+}
+

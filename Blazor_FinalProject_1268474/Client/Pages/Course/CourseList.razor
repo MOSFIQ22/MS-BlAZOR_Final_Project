@@ -1,0 +1,66 @@
+﻿@page "/Courses/List"
+@inject IConfiguration config
+@using Blazor_FinalProject_1268474.Shared.DTO;
+
+<div class="row">
+    <div class="col-12">
+        <h3>Courses</h3>
+        <div class="d-flex justify-content-end mb-1">
+            <a href="/Courses/Create" class="btn btn-primary btn-sm">Create</a>
+        </div>
+        @if (courses is null)
+        {
+            <div>Loading...</div>
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Batch Name</th>
+                        <th>Course Name</th>
+                        <th>Course Desc</th>
+                        <th>Course Duration</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Available</th>
+                        <th>...</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var c in courses)
+                    {
+                        <tr>
+                            <td>@c.BatchName</td>
+                            <td>@c.CourseName</td>
+                            <td>@c.CourseDesc</td>
+                            <td>@c.CourseDuration</td>
+                            <td>@c.StartDate.ToString("MMM yyyy")</td>
+                            <td>@c.EndDate.ToString("MMM yyyy")</td>
+                            <td>@c.Available</td>
+                            <th>
+                                <a class="btn btn-success btn-sm" href="/Courses/edit/@c.CourseID"><i class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger btn-sm @getDisabledClass(c.CanDelete)" href="/Courses/delete/@c.CourseID"><i class="bi bi-trash"></i></a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+@inject HttpClient http
+@code {
+    private CourseDTO[]? courses;
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await this.http.GetFromJsonAsync<CourseDTO[]>("api/Courses/DTO");
+    }
+    public string getDisabledClass(bool canDelete)
+    {
+        return canDelete ? "" : "disabled";
+    }
+
+}
+

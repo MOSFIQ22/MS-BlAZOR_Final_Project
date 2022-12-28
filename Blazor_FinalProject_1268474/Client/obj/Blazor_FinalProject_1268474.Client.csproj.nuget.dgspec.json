@@ -1,0 +1,166 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Client\\Blazor_FinalProject_1268474.Client.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Client\\Blazor_FinalProject_1268474.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Client\\Blazor_FinalProject_1268474.Client.csproj",
+        "projectName": "Blazor_FinalProject_1268474.Client",
+        "projectPath": "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Client\\Blazor_FinalProject_1268474.Client.csproj",
+        "packagesPath": "C:\\Users\\MUSHFIQ\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\MUSHFIQ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Shared\\Blazor_FinalProject_1268474.Shared.csproj": {
+                "projectPath": "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Shared\\Blazor_FinalProject_1268474.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Blazored.Toast": {
+              "target": "Package",
+              "version": "[3.2.2, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[7.0.0, 7.0.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Shared\\Blazor_FinalProject_1268474.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Shared\\Blazor_FinalProject_1268474.Shared.csproj",
+        "projectName": "Blazor_FinalProject_1268474.Shared",
+        "projectPath": "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Shared\\Blazor_FinalProject_1268474.Shared.csproj",
+        "packagesPath": "C:\\Users\\MUSHFIQ\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MUSHFIQ\\Desktop\\Blazor_FinalProject_1268474\\Blazor_FinalProject_1268474\\Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\MUSHFIQ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

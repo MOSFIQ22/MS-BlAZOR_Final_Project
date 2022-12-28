@@ -1,0 +1,62 @@
+﻿@page "/Trainees/List"
+@inject IConfiguration config
+@using Blazor_FinalProject_1268474.Shared.DTO;
+<div class="row">
+    <div class="col-12">
+        <h3>Trainees</h3>
+        <div class="d-flex justify-content-end mb-1">
+            <a href="/Trainees/Create" class="btn btn-primary btn-sm">Create</a>
+        </div>
+        @if (trainees is null)
+        {
+            <div>Loading...</div>
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Picture</th>
+                        <th>Course Name</th>
+                        <th>Trainee Name</th>
+                        <th>Trainee Address</th>
+                        <th>E-mail</th>
+                        <th>Birth Date</th>
+                        <th>Is Running</th>
+                        <th>...</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var c in trainees)
+                    {
+                        <tr>
+                            <td><img style="width:40px" src="/Uploads/@c.Picture" class="rounded-circle" /></td>
+                            <td>@c.CourseName</td>
+                            <td>@c.TraineeName</td>
+                            <td>@c.TraineeAddress</td>
+                            <td>@c.Email</td>
+                            <td>@c.BirthDate.ToString("MMM yyyy")</td>
+                            <td>@c.IsRunning</td>
+                            <th>
+                                <a class="btn btn-success btn-sm" href="/Trainees/Edit/@c.TraineeID"><i class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger btn-sm" href="/Trainees/delete/@c.TraineeID"><i class="bi bi-trash"></i></a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+@inject HttpClient http
+@code {
+    private TraineeDTO[]? trainees;
+    protected override async Task OnInitializedAsync()
+    {
+        trainees = await this.http.GetFromJsonAsync<TraineeDTO[]>("api/Trainees/DTO");
+    }
+
+}
+
+

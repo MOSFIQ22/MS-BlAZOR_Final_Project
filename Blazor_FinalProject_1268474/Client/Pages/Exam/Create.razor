@@ -1,0 +1,122 @@
+﻿@page "/Exams/Create"
+@inject HttpClient http
+@inject IToastService toastService
+@inject NavigationManager navManager
+<div class="row">
+    <div class="col-12">
+        <EditForm Model="@exam" OnValidSubmit="SaveExam">
+            <h3>Create Exam</h3>
+            <DataAnnotationsValidator />
+            <div class="form-group row mb-1">
+                <label class="col-form-label col-2 text-end" for="@exam.ExamName">Exam name</label>
+                <div class="col-4">
+                    <InputText @bind-Value="exam.ExamName" class="form-control" />
+                    <ValidationMessage For="@(()=>exam.ExamName)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label class="col-form-label col-2 text-end" for="@exam.ExamFee">Exam Fee</label>
+                <div class="col-4">
+                    <InputNumber @bind-Value="exam.ExamFee" class="form-control" />
+                    <ValidationMessage For="@(()=>exam.ExamFee)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+
+                <div class="col-9">
+                    <div class="d-flex justify-content-between">
+                        <h4>Items</h4> <button @onclick="@AddItem" type="button" class="btn btn-primary btn-sm m-1"><i class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            @foreach (var oi in exam.ExamResults)
+            {
+                int i = 0;
+                <div class="form-group row mb-1">
+                   @* <label class="col-form-label col-1 text-end" for="@exam.CustomerID">Product</label>*@
+                    <div class="col-3">
+                        <InputSelect @bind-Value="oi.TraineeID" class="form-select">
+                            <option value="">Select</option>
+                            @if (trainees is not null)
+                            {
+                                foreach (var p in trainees)
+                                {
+                                    <option value="@p.TraineeID">@p.TraineeName</option>
+                                }
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(()=>oi.TraineeID)" class="text-danger" />
+                    </div>
+                    <label class="col-form-label col-1 text-end" for="@oi.Result">Result</label>
+                    <div class="col-3">
+                        <InputSelect  @bind-Value="@oi.Result" class="form-select">
+                        @if (resultNames is not null)
+                        {
+                            foreach (var s in resultNames)
+                            {
+                                <option value="@s">@s</option>
+                            }
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(()=>oi.Result)" class="text-danger" />
+                    </div>
+                    <div class="col-1">
+                        <button @onclick="@(()=>RemoveItem(i++))" type="button" class="btn btn-secondary btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="form-group row mb-1">
+
+                <div class="col-9">
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Save the exam</button>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+    <div class="col-12">
+        <a href="/Exams/List" class="btn btn-link">Back to list</a>
+    </div>
+</div>
+
+@code {
+    private ExamDTO exam = new();
+    
+    private Trainee[]? trainees;
+    private string[]? resultNames;
+    protected override async Task OnInitializedAsync()
+    {
+        exam.ExamResults.Add(new ExamResultDTO());
+        resultNames = Enum.GetNames<Result>();
+       
+        trainees = await http.GetFromJsonAsync<Trainee[]>("api/Trainees");
+    }
+    private void AddItem()
+    {
+        exam.ExamResults.Add(new ExamResultDTO());
+    }
+    private void RemoveItem(int index)
+    {
+        if (exam.ExamResults.Count > 1)
+            ((List<ExamResultDTO>)exam.ExamResults).RemoveAt(exam.ExamResults.Count-1);
+    }
+    private async Task SaveExam()
+    {
+        var response = await http.PostAsJsonAsync("api/Exams/DTO", exam);
+        if (response.IsSuccessStatusCode)
+        {
+            toastService.ShowSuccess("Data saved successfully", "Success");
+            exam = new();
+            exam.ExamResults.Add(new ExamResultDTO());
+            navManager.NavigateTo("/Exams/List");
+        }
+        else
+        {
+            toastService.ShowError("Failed to data.", "Error");
+        }
+        await Task.CompletedTask;
+    }
+}

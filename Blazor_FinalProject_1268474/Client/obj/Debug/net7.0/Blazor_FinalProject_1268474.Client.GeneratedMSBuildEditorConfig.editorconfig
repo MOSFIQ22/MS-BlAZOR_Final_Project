@@ -1,0 +1,85 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = Blazor_FinalProject_1268474.Client
+build_property.RootNamespace = Blazor_FinalProject_1268474.Client
+build_property.ProjectDir = C:\Users\MUSHFIQ\Desktop\Blazor_FinalProject_1268474\Blazor_FinalProject_1268474\Client\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\MUSHFIQ\Desktop\Blazor_FinalProject_1268474\Blazor_FinalProject_1268474\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Course/CourseList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlXENvdXJzZUxpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Course/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlXENyZWF0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Course/Delete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlXERlbGV0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Course/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlXEVkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Exam/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhhbVxDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Exam/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhhbVxEZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Exam/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhhbVxFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Exam/ExamList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhhbVxFeGFtTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Trainee/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhaW5lZVxDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Trainee/Delete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhaW5lZVxEZWxldGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Trainee/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhaW5lZVxFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Trainee/TraineeList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhaW5lZVxUcmFpbmVlTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MUSHFIQ/Desktop/Blazor_FinalProject_1268474/Blazor_FinalProject_1268474/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-sb0ko5msfx

@@ -1,0 +1,85 @@
+﻿@page "/Courses/Create"
+@inject HttpClient http
+@inject IToastService toastService
+@inject NavigationManager navManager
+<div class="row">
+    <div class="col-12">
+        <EditForm Model="@course" OnValidSubmit="SaveCourse">
+            <h3>Create Course</h3>
+            <DataAnnotationsValidator />
+            <div class="form-group row mb-1">
+                <label class="col-form-label col-2 text-end" for="@course.BatchName">Batch name</label>
+                <div class="col-4">
+                     <InputText @bind-Value="course.BatchName" class="form-control" />
+                    <ValidationMessage For="@(()=>course.BatchName)" class="text-danger" />
+                </div>
+            </div>
+             <div class="form-group row mb-1">
+                <label class="col-form-label col-2 text-end" for="@course.CourseName">Course name</label>
+                <div class="col-4">
+                     <InputText @bind-Value="course.CourseName" class="form-control" />
+                    <ValidationMessage For="@(()=>course.CourseName)" class="text-danger" />
+                </div>
+            </div>
+             <div class="form-group row mb-1">
+                <label class="col-form-label col-2 text-end" for="@course.CourseDesc">Course Desc</label>
+                <div class="col-4">
+                     <InputText @bind-Value="course.CourseDesc" class="form-control" />
+                    <ValidationMessage For="@(()=>course.CourseDesc)" class="text-danger" />
+                </div>
+            </div>
+             <div class="form-group row mb-1">
+                <label class="col-form-label col-2 text-end" for="@course.CourseDuration">Course Duration</label>
+                <div class="col-4">
+                     <InputText @bind-Value="course.CourseDuration" class="form-control" />
+                    <ValidationMessage For="@(()=>course.CourseDuration)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@course.StartDate" class="col-form-label col-2 text-end">Start Date</label>
+                <div class="col-4">
+                    <InputDate   @bind-Value="course.StartDate" Type="InputDateType.Date" class="form-control" />
+                    <ValidationMessage For="@(()=> course.StartDate)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@course.EndDate" class="col-form-label col-2 text-end">End Date</label>
+                <div class="col-4">
+                    <InputDate   @bind-Value="course.EndDate" Type="InputDateType.Date" class="form-control" />
+                    <ValidationMessage For="@(()=> course.EndDate)" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for="@course.Available" class="col-form-label col-2 text-end">Available</label>
+                <div class="col-4 pt-1">
+                    <InputCheckbox @bind-Value="@course.Available" />
+
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+              
+                <div class="col-4 offset-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    
+                </div>
+            </div>
+        </EditForm>
+    </div>
+    <div class="col-12">
+        <a href="/Courses/List" class="btn btn-link">Back to list</a>
+    </div>
+</div>
+
+@code {
+    private Course course = new();
+    private async Task SaveCourse()
+    {
+        var respose = await http.PostAsJsonAsync("api/Courses", course);
+        if (respose.IsSuccessStatusCode)
+        {
+            toastService.ShowSuccess("Data saved successsfully", "Success");
+            course = new();
+            navManager.NavigateTo("/Courses/List");
+        }
+    }
+}

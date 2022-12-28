@@ -1,0 +1,68 @@
+﻿@page "/Exams/Details/{id:int}"
+@inject HttpClient http
+<div class="row">
+    <div class="row">
+        <h3>Exam Details</h3>
+        @if (exam is null)
+        {
+            <div>Loading...</div>
+        }
+        else
+        {
+            <div class="row mb-1">
+                <label class="col-2 text-end">Exam Name</label>
+                <div class="col-10">
+                    @exam.ExamName
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-2 text-end">Exam Fee</label>
+                <div class="col-10">
+                    @exam.ExamFee
+                </div>
+            </div>
+            @if (examResults is not null)
+            {
+                <div><h4>Items</h4></div>
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Trainee Name</th>
+                            <th>Result</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var oi in examResults)
+                        {
+                            <tr>
+                                <td>@oi.TraineeName</td>
+                                <td>@oi.Result</td>
+                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    </div>
+    <div class="col-12">
+        <a href="/Exams/List" class="btn btn-link">Back to list</a>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private ExamViewDTO? exam;
+    private ExamResultViewDTO[]? examResults;
+    protected override async Task OnInitializedAsync()
+    {
+        exam = await http.GetFromJsonAsync<ExamViewDTO>($"api/Exams/DTO/{id}");
+        if (exam is not null)
+        {
+            examResults = await http.GetFromJsonAsync<ExamResultViewDTO[]>($"api/Exams/Items/{id}");
+        }
+    }
+}
+

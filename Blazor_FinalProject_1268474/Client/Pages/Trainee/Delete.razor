@@ -1,0 +1,104 @@
+﻿@page "/Trainees/Delete/{id:int}"
+@using System.Net.Http.Headers;
+@using R50_M10_Class_07_Work_01.Shared.DTO;
+@inject IToastService toastService
+@inject HttpClient http;
+@inject NavigationManager navManager
+@*<div>@id</div>*@
+@if (trainee is null)
+{
+    <div>Loading...</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-9">
+            <EditForm Model="@trainee" OnValidSubmit="DeleteIt">
+                <h3>Delete Trainee</h3>
+                <DataAnnotationsValidator />
+                <div class="form-group row mb-1">
+                    <label for="@trainee.TraineeName" class="col-form-label col-form-label-sm col-2 text-end">Trainee Name</label>
+                    <div class="col-4">
+                       @trainee.TraineeName
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@trainee.TraineeAddress" class="col-form-label col-form-label-sm col-2 text-end">Trainee Address</label>
+                    <div class="col-4">
+                        @trainee.TraineeAddress
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@trainee.Email" class="col-form-label col-form-label-sm col-2 text-end">Email</label>
+                    <div class="col-4">
+                        @trainee.Email
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@trainee.CourseName" class="col-form-label col-form-label-sm col-2 text-end">Course Name</label>
+                    <div class="col-4">
+                       @trainee.CourseName
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@trainee.BirthDate" class="col-form-label col-form-label-sm col-2 text-end">Birth Date</label>
+                    <div class="col-4">
+                       @trainee.BirthDate
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@trainee.Picture" class="col-form-label col-form-label-sm col-2 text-end">Picture</label>
+                    <div class="col-4">
+                        @trainee.Picture
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+                    <label for="@trainee.IsRunning" class="col-form-label col-form-label-sm col-2 text-end">Is Running</label>
+                    <div class="col-4 pt-1">
+                        @trainee.IsRunning
+
+                    </div>
+                </div>
+                <div class="form-group row mb-1">
+
+                    <div class="col-4 offset-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Delete</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+        <div class="col-3">
+            <img src="Uploads/@trainee.Picture" class="img-thumbnail" />
+        </div>
+        <div class="col-12">
+            <a href="/Trainees/List" class="btn btn-link">Back to list</a>
+        </div>
+    </div>
+}
+@code {
+    [Parameter]
+    public int id { get; set; }
+    TraineeEdit trainee = null!;
+    private Course[]? courses = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await this.http.GetFromJsonAsync<Course[]>("api/Trainees");
+        //this.StateHasChanged();
+        var data = await http.GetFromJsonAsync<TraineeEdit>($"api/Trainees/{id}");
+        if (data is not null)
+        {
+            trainee = data;
+        }
+    }
+    private async Task DeleteIt()
+    {
+        var response = await this.http.DeleteAsync($"api/Trainees/{id}");
+       
+        if (response.IsSuccessStatusCode)
+        {
+            toastService.ShowSuccess("Data deleted successsfully", "Success");
+            navManager.NavigateTo("/Trainees/List");
+        }
+    }
+}
